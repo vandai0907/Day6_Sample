@@ -1,0 +1,160 @@
+﻿<UserControl x:Class="Day6_Sample.UserControls.RightMenuUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Day6_Sample.UserControls"
+             xmlns:vm="clr-namespace:Day6_Sample.ViewModels"
+             mc:Ignorable="d"
+             Background="#FF292929">
+    <UserControl.DataContext>
+        <vm:RightMenuVM></vm:RightMenuVM>
+    </UserControl.DataContext>
+    <Grid>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top">
+                <Image Height="67.44"
+                       Width="67.44"
+                       Margin=" 0 50 0 25"
+                       Source="../Images/Avatar.png"/>
+                <Button Height="69.46"
+                        Width="69.46"
+                        Margin=" 0 25 0 25"
+                        Cursor="Hand"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="..\UserControls\CartMenuUC.xaml">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="100"
+                                    BorderThickness="1">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush ImageSource="../Images/CartHover.png"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="False">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush ImageSource="../Images/Cart.png"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Border Background="Red"
+                                        Height="20"
+                                        Width="20"
+                                        CornerRadius="50"
+                                        Margin="0 -20 -25 0"
+                                        Visibility="{Binding HaveProducts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <TextBlock VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="AliceBlue"
+                                               Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                               FontSize="10"/>
+                                </Border>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Height="69.46"
+                        Width="69.46"
+                        Margin=" 0 25 0 25"
+                        Cursor="Hand"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="..\UserControls\ProductsUC.xaml">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="100"
+                                    BorderThickness="1">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush ImageSource="../Images/LaHover.png"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="False">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush ImageSource="../Images/La.png"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Height="69.46"
+                        Width="69.46"
+                        Cursor="Hand"
+                        Margin=" 0 25 0 25"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="..\UserControls\OrderSuccessUC.xaml">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="100"
+                                    BorderThickness="1">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush ImageSource="../Images/HeartHover.png"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="False">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush ImageSource="../Images/Heart.png"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom"
+                        VerticalAlignment="Bottom">
+                <Button Background="Transparent"
+                        BorderBrush="Transparent"
+                        Height="27.53"
+                        Width="27.53"
+                        Margin="0 100 0 20">
+                    <Image Source="../Images/FB.png" />
+                </Button>
+                <Button  Background="Transparent"
+                        BorderBrush="Transparent"
+                        Height="27.53"
+                        Width="27.53"
+                        Margin="0 0 0 70">
+                    <Image Source="../Images/Insta.png" />
+                </Button>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

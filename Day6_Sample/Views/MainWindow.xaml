@@ -1,0 +1,59 @@
+﻿<Window x:Class="Day6_Sample.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Day6_Sample.Views"
+        xmlns:uc="clr-namespace:Day6_Sample.UserControls"
+        xmlns:vm="clr-namespace:Day6_Sample.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="832"
+        Width="1300"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        xmlns:tb="http://www.hardcodet.net/taskbar">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="20" />
+    </WindowChrome.WindowChrome>
+    <Window.DataContext>
+        <vm:MainVM></vm:MainVM>
+    </Window.DataContext>
+    <Window.Clip>
+        <RectangleGeometry Rect="0 0 1300 832" RadiusX="50" RadiusY="50"/>
+    </Window.Clip>
+    <DockPanel>
+        <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" WindowChrome.IsHitTestVisibleInChrome="True"
+                   Background="White"
+                   MouseDown="TitleBar_OnMouseDown">
+            <Button x:Name="CloseButton" Content="X"
+                    Width="60"
+                    Height="20"
+                    DockPanel.Dock="Right"
+                    Click="CloseButton_OnClick"/>
+            <Button x:Name="MaxButton" Content="#"
+                    Width="35"
+                    Height="20"
+                    DockPanel.Dock="Right" />
+            <Button x:Name="MinButton" Content="_"
+                    Width="34"
+                    Height="20"
+                    DockPanel.Dock="Right" />
+
+            <TextBlock HorizontalAlignment="Center"></TextBlock>
+        </DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="129"/>
+            </Grid.ColumnDefinitions>
+            <Frame Source="{Binding Url}"
+                   NavigationUIVisibility="Hidden"/>
+            <uc:RightMenuUC Grid.Column="1"/>
+        </Grid>
+    </DockPanel>
+
+</Window>
