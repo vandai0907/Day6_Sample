@@ -6,8 +6,6 @@
              xmlns:local="clr-namespace:Day6_Sample.UserControls"
              mc:Ignorable="d"
              Background="#FFFFFF"
-             Width="1171"
-             Height="832"
              Padding="60 30">
     <UserControl.Resources>
         <ResourceDictionary>

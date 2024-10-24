@@ -56,5 +56,10 @@ namespace Day6_Sample.Views
             this.WindowState = WindowState.Minimized;
 
         }
+
+        private void MaxButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        }
     }
 }

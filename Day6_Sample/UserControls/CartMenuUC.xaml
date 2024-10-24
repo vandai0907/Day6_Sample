@@ -7,8 +7,6 @@
              xmlns:vm="clr-namespace:Day6_Sample.ViewModels"
              mc:Ignorable="d"
              Background="#FFFFFF"
-             Width="1171"
-             Height="832"
              Padding="60 30">
     <UserControl.DataContext>
         <vm:CartMenuVM></vm:CartMenuVM>

@@ -17,14 +17,13 @@
         Background="Transparent"
         xmlns:tb="http://www.hardcodet.net/taskbar">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="20" />
+        <WindowChrome CaptionHeight="20"
+                      CornerRadius="70"
+                      GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
     <Window.DataContext>
         <vm:MainVM></vm:MainVM>
     </Window.DataContext>
-    <Window.Clip>
-        <RectangleGeometry Rect="0 0 1300 832" RadiusX="50" RadiusY="50"/>
-    </Window.Clip>
     <DockPanel>
         <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" WindowChrome.IsHitTestVisibleInChrome="True"
                    Background="White"
@@ -37,7 +36,8 @@
             <Button x:Name="MaxButton" Content="#"
                     Width="35"
                     Height="20"
-                    DockPanel.Dock="Right" />
+                    DockPanel.Dock="Right"
+                    Click="MaxButton_OnClick"/>
             <Button x:Name="MinButton" Content="_"
                     Width="34"
                     Height="20"
@@ -47,8 +47,8 @@
         </DockPanel>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="129"/>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Frame Source="{Binding Url}"
                    NavigationUIVisibility="Hidden"/>
