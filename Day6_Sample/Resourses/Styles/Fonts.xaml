@@ -1,4 +1,4 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <FontFamily x:Key="FontFamily">pack://application:,,,/Day6_Sample;Resourses/Fonts/#Ruda</FontFamily>
+    <FontFamily x:Key="FontFamily">pack://application:,,,/Day6_Sample;Component/Resourses/Fonts/#Ruda</FontFamily>
 </ResourceDictionary>

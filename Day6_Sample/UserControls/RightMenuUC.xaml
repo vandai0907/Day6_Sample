@@ -13,9 +13,11 @@
     <Grid>
         <DockPanel>
             <StackPanel DockPanel.Dock="Top">
-                <Image Height="70"
-                       Margin=" 0 45 0 25"
-                       Source="../Images/Avatar.png"/>
+                <Rectangle RadiusX="60" RadiusY="80" Width="67.44" Height="67.44" Margin=" 0 45 0 25">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="../Images/Avatar.jfif"/>
+                    </Rectangle.Fill>
+                </Rectangle>
                 <Button Height="75"
                         Width="75"
                         Margin=" 0 10 0 15"
@@ -143,11 +145,17 @@
                 <Image Source="../Images/FB.png"
                        Height="27.53"
                        Width="27.53"
-                       Margin="0 100 0 20"/>
+                       Margin="0 100 0 20"
+                       MouseDown="FB_OnMouseDown"
+                       Cursor="Hand">
+
+                </Image>
                 <Image Height="27.53"
                        Width="27.53"
                        Source="../Images/Insta.png"
-                       Margin="0 0 0 70"/>
+                       Margin="0 0 0 70"
+                       Cursor="Hand"
+                       MouseDown="Ins_OnMouseDown"/>
             </StackPanel>
         </DockPanel>
     </Grid>

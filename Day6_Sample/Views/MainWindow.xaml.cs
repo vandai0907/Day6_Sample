@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
 using Application = System.Windows.Application;
 
 namespace Day6_Sample.Views
@@ -15,6 +16,7 @@ namespace Day6_Sample.Views
         {
             InitializeComponent();
             Init();
+            RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.Fant);
         }
 
         private void Init()

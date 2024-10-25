@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Day6_Sample.UserControls
 {
@@ -10,6 +12,16 @@ namespace Day6_Sample.UserControls
         public RightMenuUC()
         {
             InitializeComponent();
+        }
+
+        private void FB_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("http://www.facebook.com") { UseShellExecute = true });
+        }
+
+        private void Ins_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://www.instagram.com") { UseShellExecute = true });
         }
     }
 }

@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <None Remove="Images\arrowleft.png" />
-    <None Remove="Images\Avatar.png" />
+    <None Remove="Images\Avatar.jfif" />
     <None Remove="Images\Cart.png" />
     <None Remove="Images\CartHover.png" />
     <None Remove="Images\FB.png" />
@@ -47,7 +47,7 @@
     <Resource Include="Images\arrowleft.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Avatar.png">
+    <Resource Include="Images\Avatar.jfif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Cart.png">
