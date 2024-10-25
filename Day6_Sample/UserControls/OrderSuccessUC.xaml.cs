@@ -19,5 +19,10 @@ namespace Day6_Sample.UserControls
         {
             WeakReferenceMessenger.Default.Send<NavigateWindow>(new NavigateWindow("..\\UserControls\\CartMenuUC.xaml"));
         }
+
+        private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            WeakReferenceMessenger.Default.Send<NavigateWindow>(new NavigateWindow("..\\UserControls\\CartMenuUC.xaml"));
+        }
     }
 }

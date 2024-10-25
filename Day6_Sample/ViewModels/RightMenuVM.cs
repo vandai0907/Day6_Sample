@@ -4,27 +4,18 @@ using CommunityToolkit.Mvvm.Messaging;
 using Day6_Sample.Interfaces;
 using Day6_Sample.Models;
 using Day6_Sample.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Day6_Sample.ViewModels
 {
-    public class RightMenuVM : ObservableObject
+    public partial class RightMenuVM : ObservableObject
     {
-        private Visibility _haveProducts = Visibility.Hidden;
         private int _quantity;
-        private readonly ICartService _cartService = new CartService();
-        public ICommand NavigateCommand { get; }
+        private readonly ICartService _cartService;
 
-        public Visibility HaveProducts
-        {
-            get => _haveProducts;
-            set
-            {
-                _haveProducts = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        private Visibility _haveProducts = Visibility.Hidden;
 
         public int Quantity
         {
@@ -39,7 +30,9 @@ namespace Day6_Sample.ViewModels
 
         public RightMenuVM()
         {
-            NavigateCommand = new RelayCommand<string>(OnNavigateClick);
+            var serviceProvider = App.GetServiceProvider();
+            _cartService = serviceProvider.GetService<CartService>();
+
             Quantity = _cartService.GetTotalCart();
             WeakReferenceMessenger.Default.Register<ListCart>(this, OnUpdateCart);
         }
@@ -49,7 +42,8 @@ namespace Day6_Sample.ViewModels
             Quantity = _cartService.GetTotalCart();
         }
 
-        private void OnNavigateClick(string url)
+        [RelayCommand]
+        private void Navigate(string url)
         {
             WeakReferenceMessenger.Default.Send<NavigateWindow>(new NavigateWindow(url));
         }

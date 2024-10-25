@@ -13,13 +13,12 @@
     <Grid>
         <DockPanel>
             <StackPanel DockPanel.Dock="Top">
-                <Image Height="67.44"
-                       Width="67.44"
-                       Margin=" 0 50 0 25"
+                <Image Height="70"
+                       Margin=" 0 45 0 25"
                        Source="../Images/Avatar.png"/>
-                <Button Height="69.46"
-                        Width="69.46"
-                        Margin=" 0 25 0 25"
+                <Button Height="75"
+                        Width="75"
+                        Margin=" 0 10 0 15"
                         Cursor="Hand"
                         Command="{Binding NavigateCommand}"
                         CommandParameter="..\UserControls\CartMenuUC.xaml">
@@ -58,6 +57,7 @@
                                     <TextBlock VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Foreground="AliceBlue"
+                                               Style="{DynamicResource TextBlockBase}"
                                                Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                FontSize="10"/>
                                 </Border>
@@ -65,9 +65,9 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Height="69.46"
-                        Width="69.46"
-                        Margin=" 0 25 0 25"
+                <Button Height="75"
+                        Width="75"
+                        Margin=" 0 10 0 15"
                         Cursor="Hand"
                         Command="{Binding NavigateCommand}"
                         CommandParameter="..\UserControls\ProductsUC.xaml">
@@ -101,10 +101,10 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Height="69.46"
-                        Width="69.46"
+                <Button Height="75"
+                        Width="75"
                         Cursor="Hand"
-                        Margin=" 0 25 0 25"
+                        Margin=" 0 10 0 15"
                         Command="{Binding NavigateCommand}"
                         CommandParameter="..\UserControls\OrderSuccessUC.xaml">
                     <Button.Template>
@@ -140,20 +140,14 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom"
                         VerticalAlignment="Bottom">
-                <Button Background="Transparent"
-                        BorderBrush="Transparent"
-                        Height="27.53"
-                        Width="27.53"
-                        Margin="0 100 0 20">
-                    <Image Source="../Images/FB.png" />
-                </Button>
-                <Button  Background="Transparent"
-                        BorderBrush="Transparent"
-                        Height="27.53"
-                        Width="27.53"
-                        Margin="0 0 0 70">
-                    <Image Source="../Images/Insta.png" />
-                </Button>
+                <Image Source="../Images/FB.png"
+                       Height="27.53"
+                       Width="27.53"
+                       Margin="0 100 0 20"/>
+                <Image Height="27.53"
+                       Width="27.53"
+                       Source="../Images/Insta.png"
+                       Margin="0 0 0 70"/>
             </StackPanel>
         </DockPanel>
     </Grid>

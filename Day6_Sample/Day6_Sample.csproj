@@ -25,13 +25,22 @@
     <None Remove="Images\Insta.png" />
     <None Remove="Images\La.png" />
     <None Remove="Images\LaHover.png" />
+    <None Remove="Images\Menu.png" />
     <None Remove="Images\RedHeart.png" />
+    <None Remove="Resourses\Fonts\Ruda.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resourses\Fonts\Ruda.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,9 +80,9 @@
     <Resource Include="Images\HeartHover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\icon.ico">
+    <EmbeddedResource Include="Images\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </EmbeddedResource>
     <Resource Include="Images\Insta.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -81,6 +90,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\LaHover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Menu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\RedHeart.png">

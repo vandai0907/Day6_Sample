@@ -10,14 +10,6 @@
     <UserControl.DataContext>
         <vm:MainMenuVM></vm:MainMenuVM>
     </UserControl.DataContext>
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <LinearGradientBrush x:Key="ButtonStyleGradient"  EndPoint="2,1" StartPoint="0,1">
-                <GradientStop Color="#FF53C026" Offset="0" />
-                <GradientStop Color="#FFB4F498" Offset="1" />
-            </LinearGradientBrush>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="{Binding Product.Image}"></ImageBrush>
@@ -43,9 +35,10 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
                                Text="Desserts"
+                               Style="{DynamicResource TextBlockBase}"
                                Foreground="#ACACAC"
                                FontWeight="DemiBold"
-                               FontSize="23"
+                               FontSize="16"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"/>
                     <StackPanel Grid.Column="1"
@@ -54,25 +47,31 @@
                                 HorizontalAlignment="Right">
                         <Image Source="../Images/RedHeart.png" Height="30"
                                Width="30"/>
-                        <TextBlock Text="{Binding Product.Like}"
+                        <TextBlock Text="{Binding Product.Like, StringFormat=' {0}k'}"
+                                   Style="{DynamicResource TextBlockBase}"
                                    HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Margin="5 0 0 0"
                                    Foreground="#292929"
                                    FontWeight="DemiBold"
-                                   FontSize="23"/>
+                                   FontSize="16"/>
                     </StackPanel>
                 </Grid>
                 <TextBlock Grid.Row="1"
                            Text="{Binding Product.Name}"
                            HorizontalAlignment="Left"
-                           FontSize="26"
+                           Style="{DynamicResource TextBlockBase}"
+                           FontSize="24"
                            FontWeight="DemiBold"
                            VerticalAlignment="Center"
                            Foreground="#292929"/>
                 <TextBlock Grid.Row="2"
                            Text="{Binding Product.Description}"
+                           Style="{DynamicResource TextBlockBase}"
                            HorizontalAlignment="Left"
                            TextWrapping="Wrap"
                            FontWeight="DemiBold"
+                           FontSize="14"
                            VerticalAlignment="Center"
                            Foreground="#292929"/>
                 <Grid Grid.Row="3">
@@ -86,14 +85,16 @@
                             Height="40"
                             Width="140"
                             Background="#FFE9F5E3">
-                        <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Center"
-                                    Margin="1 0 0 0">
-                            <Button Height="40"
+                        <DockPanel Width="140"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Margin="1 0 0 0">
+                            <Button DockPanel.Dock="Left"
+                                    Height="40"
                                     Width="40"
                                     IsEnabled="{Binding IsEnableSub, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Cursor="Hand"
-                                    Command="{Binding CountQuantity}"
+                                    Command="{Binding CountQuantityCommand}"
                                     CommandParameter="-1">
                                 <Button.Template>
                                     <ControlTemplate>
@@ -139,14 +140,20 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-                            <TextBlock Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                       FontSize="20"
-                                       Margin="24 6"/>
-                            <Button Height="40"
+                            <TextBlock
+                                Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{DynamicResource TextBlockBase}"
+                                FontSize="24"
+                                VerticalAlignment="Center"
+                                Margin="20 0 0 0"
+                                />
+                            <Button DockPanel.Dock="Right"
+                                    HorizontalAlignment="Right"
+                                    Height="40"
                                     Width="40"
                                     IsEnabled="{Binding IsEnablePlus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Cursor="Hand"
-                                    Command="{Binding CountQuantity}"
+                                    Command="{Binding CountQuantityCommand}"
                                     CommandParameter="1">
                                 <Button.Template>
                                     <ControlTemplate>
@@ -192,45 +199,27 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-                        </StackPanel>
+                        </DockPanel>
                     </Border>
                     <TextBlock Grid.Column="1"
                                Text="{Binding Product.Price, StringFormat='${0}'}"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center"
-                               FontSize="30"
+                               FontSize="32"
                                FontWeight="DemiBold"
                                Foreground="#329211"/>
                 </Grid>
                 <Button Grid.Row="4"
                         Command="{Binding AddCommand}"
                         IsEnabled="{Binding IsEnableSub, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{DynamicResource ButtonTemplate}"
+                        Content="Add to my Food Bag"
                         Cursor="Hand">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="30"
-                                    Background="{StaticResource ButtonStyleGradient}">
 
-                                <TextBlock FontSize="20"
-                                           Foreground="White"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center">Add to Food Bag</TextBlock>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver"
-                                         Value="True">
-                                    <Setter Property="Background"
-                                            Value="ForestGreen"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
                 </Button>
                 <TextBlock Grid.Row="5"
+                           Style="{DynamicResource TextBlockBase}"
+                           FontSize="12"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Text="{Binding Product.Person, StringFormat='Best for {0} person'}"/>

@@ -1,50 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Day6_Sample.Models;
-using System.Windows;
-using System.Windows.Input;
 
 namespace Day6_Sample.ViewModels;
 
-public class MainVM : ObservableObject
+public partial class MainVM : ObservableObject
 {
-    private string _url = "..\\UserControls\\ProductsUC.xaml";
-    private WindowState _windowState;
-    private bool _showInTaskbar;
-    public ICommand CloseCommand { get; }
-
-    public string Url
-    {
-        get => _url;
-        set
-        {
-            if (value == _url) return;
-            _url = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public WindowState WindowState
-    {
-        get => _windowState;
-        set
-        {
-            ShowInTaskbar = true;
-            SetProperty(ref _windowState, value);
-            ShowInTaskbar = value != WindowState.Minimized;
-        }
-    }
-
-    public bool ShowInTaskbar
-    {
-        get => _showInTaskbar;
-        set
-        {
-            _showInTaskbar = value;
-            OnPropertyChanged();
-        }
-    }
+    [ObservableProperty]
+    private string _url = @"..\UserControls\ProductsUC.xaml";
 
     public MainVM()
     {
@@ -67,12 +30,6 @@ public class MainVM : ObservableObject
             }
         }
         WeakReferenceMessenger.Default.Register<NavigateWindow>(this, OnChangedPage);
-        CloseCommand = new RelayCommand(OnCloseClick);
-    }
-
-    private void OnCloseClick()
-    {
-        WindowState = WindowState.Minimized;
     }
 
     private void OnChangedPage(object recipient, NavigateWindow message)

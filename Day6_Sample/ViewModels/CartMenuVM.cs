@@ -4,23 +4,24 @@ using CommunityToolkit.Mvvm.Messaging;
 using Day6_Sample.Interfaces;
 using Day6_Sample.Models;
 using Day6_Sample.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Day6_Sample.ViewModels;
 
-public class CartMenuVM : ObservableObject
+public partial class CartMenuVM : ObservableObject
 {
-    private ObservableCollection<Cart> _cart;
     private double _totalPrice;
     private double _tax;
     private double _serviceCharge;
-    private readonly ICartService _cartService = new CartService();
-    private readonly IProductService _productService = new ProductService();
-    public ICommand SubQuantity { get; }
-    public ICommand PlusQuantity { get; }
+    private ObservableCollection<Cart> _cart;
+    private readonly ICartService _cartService;
+    private readonly IProductService _productService;
     public ICommand AddCommand { get; }
-
+    public ICommand PlusQuantityCommand { get; }
+    public ICommand SubQuantityCommand { get; }
     public ObservableCollection<Cart> Cart
     {
         get => _cart;
@@ -63,11 +64,16 @@ public class CartMenuVM : ObservableObject
 
     public CartMenuVM()
     {
+        var serviceProvider = App.GetServiceProvider();
+        _cartService = serviceProvider.GetService<CartService>();
+        _productService = serviceProvider.GetService<ProductService>();
+
         Init();
         CalculatePrice();
-        AddCommand = new RelayCommand(OnAddProduct);
-        SubQuantity = new RelayCommand<object>(OnSubClick);
-        PlusQuantity = new RelayCommand<object>(OnPlusClick);
+
+        AddCommand = new RelayCommand(Add);
+        PlusQuantityCommand = new RelayCommand<object>(PlusQuantity);
+        SubQuantityCommand = new RelayCommand<object>(SubQuantity);
     }
 
     private void Init()
@@ -83,7 +89,7 @@ public class CartMenuVM : ObservableObject
         }
     }
 
-    private void OnPlusClick(object obj)
+    private void PlusQuantity(object obj)
     {
         if (obj is Cart cart)
         {
@@ -91,7 +97,7 @@ public class CartMenuVM : ObservableObject
         }
     }
 
-    private void OnSubClick(object obj)
+    private void SubQuantity(object obj)
     {
         if (obj is Cart cart)
         {
@@ -103,6 +109,12 @@ public class CartMenuVM : ObservableObject
     {
         var product = _productService.GetProductById(int.Parse(cart.ProductId));
         int quantity = cart.Quantity + value;
+        if (quantity == 0)
+        {
+            var decision = MessageBox.Show("Xóa sản phẩm khỏi giỏ hàng", "Xác nhận", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (decision == DialogResult.No) return;
+        }
         product.Quantity -= value;
         _productService.UpdateQuantity(product);
         _cartService.UpdateCart(cart, quantity);
@@ -118,7 +130,7 @@ public class CartMenuVM : ObservableObject
         CalculatePrice();
     }
 
-    private void OnAddProduct()
+    private void Add()
     {
         _cartService.Order();
         WeakReferenceMessenger.Default.Send<ListCart>(new ListCart());

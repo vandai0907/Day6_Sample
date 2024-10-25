@@ -1,6 +1,7 @@
 ﻿using Day6_Sample.Interfaces;
 using Day6_Sample.Models;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Text;
 
@@ -12,7 +13,8 @@ namespace Day6_Sample.Services
 
         public CartService()
         {
-            _connection = DatabaseService.GetConnection();
+            var serviceProvider = App.GetServiceProvider();
+            _connection = serviceProvider.GetRequiredService<DatabaseService>().Connection;
         }
 
         public void AddToCart(Product product)

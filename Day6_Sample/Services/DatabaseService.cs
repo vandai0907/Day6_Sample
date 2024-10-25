@@ -5,10 +5,12 @@ namespace Day6_Sample.Services;
 
 public class DatabaseService
 {
-    public static SqliteConnection GetConnection()
+    public SqliteConnection Connection { get; }
+
+    public DatabaseService()
     {
         string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string dbpath = Path.Combine(folderPath, "sqliteSample.db");
-        return new SqliteConnection($"Filename={dbpath}");
+        Connection = new SqliteConnection($"Filename={dbpath}");
     }
 }

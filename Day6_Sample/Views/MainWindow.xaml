@@ -8,46 +8,48 @@
         xmlns:vm="clr-namespace:Day6_Sample.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow"
-        Height="832"
-        Width="1300"
+        Height="810"
+        Width="1240"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="Transparent"
-        xmlns:tb="http://www.hardcodet.net/taskbar">
+        Background="Transparent">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="20"
-                      CornerRadius="70"
                       GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,1240,810" RadiusX="60" RadiusY="60"/>
+    </Window.Clip>
     <Window.DataContext>
         <vm:MainVM></vm:MainVM>
     </Window.DataContext>
     <DockPanel>
-        <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" WindowChrome.IsHitTestVisibleInChrome="True"
-                   Background="White"
-                   MouseDown="TitleBar_OnMouseDown">
-            <Button x:Name="CloseButton" Content="X"
-                    Width="60"
-                    Height="20"
-                    DockPanel.Dock="Right"
-                    Click="CloseButton_OnClick"/>
-            <Button x:Name="MaxButton" Content="#"
-                    Width="35"
-                    Height="20"
-                    DockPanel.Dock="Right"
-                    Click="MaxButton_OnClick"/>
-            <Button x:Name="MinButton" Content="_"
-                    Width="34"
-                    Height="20"
-                    DockPanel.Dock="Right" />
+        <!--<DockPanel x:Name="TitleBar" DockPanel.Dock="Top" WindowChrome.IsHitTestVisibleInChrome="True"
+        Background="White"
+        MouseDown="TitleBar_OnMouseDown">
+        <Button x:Name="CloseButton" Content="╳"
+        Width="60"
+        Height="20"
+        DockPanel.Dock="Right"
+        Click="CloseButton_OnClick"/>
+        <Button x:Name="MaxButton" Content="❐"
+        Width="35"
+        Height="20"
+        DockPanel.Dock="Right"
+        Click="MaxButton_OnClick"/>
+        <Button x:Name="MinButton" Content="▁"
+        Width="34"
+        Height="20"
+        DockPanel.Dock="Right"
+        Click="MinButton_OnClick"/>
 
-            <TextBlock HorizontalAlignment="Center"></TextBlock>
-        </DockPanel>
+        <TextBlock HorizontalAlignment="Center"></TextBlock>
+        </DockPanel>-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="8.5*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Frame Source="{Binding Url}"
@@ -55,5 +57,4 @@
             <uc:RightMenuUC Grid.Column="1"/>
         </Grid>
     </DockPanel>
-
 </Window>

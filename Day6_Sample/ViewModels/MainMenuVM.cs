@@ -4,29 +4,28 @@ using CommunityToolkit.Mvvm.Messaging;
 using Day6_Sample.Interfaces;
 using Day6_Sample.Models;
 using Day6_Sample.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Input;
 
 namespace Day6_Sample.ViewModels;
 
-public class MainMenuVM : ObservableObject
+public partial class MainMenuVM : ObservableObject
 {
+
     private Product _product;
     private bool _isEnableSub;
     private bool _isEnablePlus;
     private int _quantity;
-    private readonly ICartService _cartService = new CartService();
-    private readonly IProductService _productService = new ProductService();
-
-    public ICommand CountQuantity { get; set; }
-
-    public ICommand AddCommand { get; set; }
+    private readonly ICartService _cartService;
+    private readonly IProductService _productService;
+    public ICommand AddCommand { get; }
+    public ICommand CountQuantityCommand { get; }
 
     public Product Product
     {
         get => _product;
         set
         {
-            if (Equals(value, _product)) return;
             _product = value;
             OnPropertyChanged();
         }
@@ -64,24 +63,38 @@ public class MainMenuVM : ObservableObject
 
     public MainMenuVM()
     {
-        CountQuantity = new RelayCommand<string>(OnCountQuantityClick);
-        Product = _productService.GetProducts().FirstOrDefault();
-        OnCountQuantityClick(string.Empty);
-        WeakReferenceMessenger.Default.Register<SelectedProduct>(this, OnSelectedProduct);
-        AddCommand = new RelayCommand(OnAddProduct);
+        var serviceProvider = App.GetServiceProvider();
+        _cartService = serviceProvider.GetService<CartService>();
+        _productService = serviceProvider.GetService<ProductService>();
 
+        Product = _productService.GetProducts().FirstOrDefault();
+        CountQuantity(string.Empty);
+        WeakReferenceMessenger.Default.Register<SelectedProduct>(this, OnSelectedProduct);
+
+        AddCommand = new RelayCommand(Add);
+        CountQuantityCommand = new RelayCommand<string>(CountQuantity);
     }
 
     private void OnSelectedProduct(object recipient, SelectedProduct message)
     {
-        Product = message.Product;
+        if (message.Product is Product value)
+            Product = new Product()
+            {
+                Id = value.Id,
+                Name = value.Name,
+                Description = value.Description,
+                Quantity = value.Quantity,
+                Image = value.Image,
+                Like = value.Like,
+                Person = value.Person,
+                Price = value.Price,
+            };
         Quantity = 0;
-        OnCountQuantityClick(string.Empty);
+        CountQuantity(string.Empty);
     }
 
-    private void OnCountQuantityClick(string count)
+    private void CountQuantity(string count)
     {
-        if (Product is null) return;
         int.TryParse(count, out int value);
         Quantity += value;
         Product.Quantity -= value;
@@ -89,7 +102,7 @@ public class MainMenuVM : ObservableObject
         IsEnableSub = Quantity != 0;
     }
 
-    private void OnAddProduct()
+    private void Add()
     {
         var product = new Product()
         {

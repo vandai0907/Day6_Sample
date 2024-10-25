@@ -27,50 +27,40 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Image Source="../Images/arrowleft.png"
+                   Cursor="Hand"
+                   
                    HorizontalAlignment="Left"
-                   Height="40"/>
+                   Height="40" MouseDown="Image_MouseDown"/>
             <TextBlock Grid.Column="1"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontSize="32"
-                       FontWeight="Bold"
-                       Text="FoodMenu"
-                       Foreground="#FF5D9F24"/>
-            <TextBlock Grid.Column="2"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       FontSize="32"
-                       FontWeight="Bold"
-                       Text="≡"
-                       Foreground="#000000"/>
+                       Style="{DynamicResource Title}"
+                       Text="FoodMenu"/>
+            <Image Grid.Column="2"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Source="../Images/Menu.png"
+                   Width="29.25"
+                   Height="16.25"/>
         </Grid>
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <TextBlock Text="Yoohooo !"
+                       Style="{DynamicResource TextBlockBase}"
                        FontSize="64"
                        FontWeight="DemiBold"
                        HorizontalAlignment="Center"/>
             <TextBlock Text="Your order has been placed successfully "
+                       Style="{DynamicResource TextBlockBase}"
                        FontSize="36"
                        FontWeight="DemiBold"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center"
+                       Margin="0 30 0 0"/>
             <Button Height="66"
                     Width="330"
                     Margin="0 70 0 0"
-                    Click="ButtonBase_OnClick">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border CornerRadius="30"
-                                Background="{StaticResource ButtonStyleGradient}">
-
-                            <TextBlock FontSize="20"
-                                       Foreground="White"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center">Add to Food Bag</TextBlock>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
+                    Click="ButtonBase_OnClick"
+                    Style="{DynamicResource ButtonTemplate}"
+                    Content="Back to Menu">
             </Button>
         </StackPanel>
     </Grid>

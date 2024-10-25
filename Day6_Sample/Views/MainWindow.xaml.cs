@@ -20,7 +20,7 @@ namespace Day6_Sample.Views
         private void Init()
         {
             var ni = new NotifyIcon();
-            ni.Icon = new System.Drawing.Icon("icon.ico");
+            ni.Icon = new System.Drawing.Icon("Images/icon.ico");
             ni.Visible = true;
             ni.DoubleClick += NiOnDoubleClick;
 
@@ -60,6 +60,11 @@ namespace Day6_Sample.Views
         private void MaxButton_OnClick(object sender, RoutedEventArgs e)
         {
             this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        }
+
+        private void MinButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

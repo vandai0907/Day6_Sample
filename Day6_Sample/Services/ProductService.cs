@@ -1,6 +1,7 @@
 ﻿using Day6_Sample.Interfaces;
 using Day6_Sample.Models;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 
 namespace Day6_Sample.Services;
@@ -11,7 +12,8 @@ public class ProductService : IProductService
 
     public ProductService()
     {
-        _connection = DatabaseService.GetConnection();
+        var serviceProvider = App.GetServiceProvider();
+        _connection = serviceProvider.GetRequiredService<DatabaseService>().Connection;
     }
 
     public List<Product> GetProducts()
