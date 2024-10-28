@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using Day6_Sample.ViewModels;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace Day6_Sample.UserControls
 {
@@ -10,6 +13,18 @@ namespace Day6_Sample.UserControls
         public MainMenuUC()
         {
             InitializeComponent();
+        }
+
+        private void Geometry_Changed(object sender, EventArgs e)
+        {
+            DoubleAnimation animation = new DoubleAnimation(30, 35, TimeSpan.FromSeconds(0.2));
+            animation.AutoReverse = true;
+            Heart.BeginAnimation(Rectangle.HeightProperty, animation);
+        }
+
+        private void Rectangle_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ((MainMenuVM)DataContext).TestColor.Execute(null);
         }
     }
 }

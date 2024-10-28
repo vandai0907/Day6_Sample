@@ -23,6 +23,7 @@ public static class Data
         sqlQuery.AppendLine("Like DECIMAL,");
         sqlQuery.AppendLine("Person INTEGER,");
         sqlQuery.AppendLine("Image NVARCHAR(2048) NULL,");
+        sqlQuery.AppendLine("IsLiked INTEGER,");
         sqlQuery.AppendLine("Quantity INTEGER");
         sqlQuery.AppendLine(")");
         var createTable = new SqliteCommand(sqlQuery.ToString(), db);
@@ -49,6 +50,22 @@ public static class Data
         createTable.ExecuteReader();
     }
 
+    public static void InitImage()
+    {
+        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string dbpath = Path.Combine(folderPath, "sqliteSample.db");
+        using var db = new SqliteConnection($"Filename={dbpath}");
+        db.Open();
+        var sqlQuery = new StringBuilder();
+        sqlQuery.AppendLine("CREATE TABLE IF NOT ");
+        sqlQuery.AppendLine("EXISTS Images (");
+        sqlQuery.AppendLine("ProductId INTEGER,");
+        sqlQuery.AppendLine("Image NVARCHAR(2048) NULL");
+        sqlQuery.AppendLine(")");
+        var createTable = new SqliteCommand(sqlQuery.ToString(), db);
+        createTable.ExecuteReader();
+    }
+
     public static void AddData(Product product)
     {
         var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -60,7 +77,7 @@ public static class Data
         insertCommand.Connection = db;
 
         // Use parameterized query to prevent SQL injection attacks
-        insertCommand.CommandText = "INSERT INTO Products VALUES (@Id, @Name, @Description, @Price, @Like, @Person, @Image, @Quantity);";
+        insertCommand.CommandText = "INSERT INTO Products VALUES (@Id, @Name, @Description, @Price, @Like, @Person, @Image, @IsLiked, @Quantity);";
         insertCommand.Parameters.AddWithValue("@Id", int.Parse(product.Id));
         insertCommand.Parameters.AddWithValue("@Name", product.Name);
         insertCommand.Parameters.AddWithValue("@Description", product.Description);
@@ -68,6 +85,7 @@ public static class Data
         insertCommand.Parameters.AddWithValue("@Like", product.Like);
         insertCommand.Parameters.AddWithValue("@Person", product.Person);
         insertCommand.Parameters.AddWithValue("@Image", product.Image);
+        insertCommand.Parameters.AddWithValue("@IsLiked", product.IsLiked);
         insertCommand.Parameters.AddWithValue("@Quantity", product.Quantity);
 
         insertCommand.ExecuteReader();
@@ -81,7 +99,7 @@ public static class Data
         using var db = new SqliteConnection($"Filename={dbpath}");
         db.Open();
         var selectCommand = new SqliteCommand
-            ("SELECT Name, Description, Price, Like, Person, Image, Quantity, Id from Products", db);
+            ("SELECT Name, Description, Price, Like, Person, Image, Quantity, Id, IsLiked from Products", db);
 
         SqliteDataReader query = selectCommand.ExecuteReader();
 
@@ -96,7 +114,8 @@ public static class Data
                 Person = query.GetInt32(4),
                 Image = query.GetString(5),
                 Quantity = query.GetInt32(6),
-                Id = query.GetString(7)
+                Id = query.GetString(7),
+                IsLiked = query.GetInt32(8) == 1,
             };
             entries.Add(product);
         }

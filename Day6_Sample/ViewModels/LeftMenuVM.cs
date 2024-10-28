@@ -28,9 +28,12 @@ public partial class LeftMenuVM : ObservableObject
         get => _selectedProduct;
         set
         {
-            _selectedProduct = value;
-            OnPropertyChanged();
-            WeakReferenceMessenger.Default.Send<SelectedProduct>(new SelectedProduct(value));
+            if (value is not null)
+            {
+                _selectedProduct = value;
+                OnPropertyChanged();
+                WeakReferenceMessenger.Default.Send<SelectedProduct>(new SelectedProduct(value));
+            }
         }
     }
 
@@ -45,13 +48,12 @@ public partial class LeftMenuVM : ObservableObject
 
     private void OnProductsUpdate(object recipient, ListProduct message)
     {
-        Init();
+        Init(message.SelectedProduct);
     }
 
-    private void Init()
+    private void Init(Product product = null)
     {
         Products = _productService.GetProducts();
-        SelectedProduct = Products.FirstOrDefault();
-
+        SelectedProduct = product;
     }
 }

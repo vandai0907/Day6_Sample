@@ -45,8 +45,29 @@
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right">
-                        <Image Source="../Images/RedHeart.png" Height="30"
-                               Width="30"/>
+                        <Rectangle x:Name="Heart"
+                                   Cursor="Hand"
+                                   Height="30"
+                                   Width="34"
+                                   MouseDown="Rectangle_MouseDown">
+                            <Rectangle.Fill>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <DrawingImage>
+                                            <DrawingImage.Drawing>
+                                                <DrawingGroup ClipGeometry="M0,0 V21 H23 V0 H0 Z">
+                                                    <GeometryDrawing x:Name="Geometry" Brush="{Binding ColorTest}" Geometry="F1 M23,21z M0,0z M12.127,19.4107C11.7832,19.532 11.2168,19.532 10.8729,19.4107 7.93974,18.4094 1.38571,14.2322 1.38571,7.1522 1.38571,4.0269 3.90416,1.49834 7.00923,1.49834 8.85003,1.49834 10.4784,2.38839 11.5,3.76393 12.0196,3.06188 12.6965,2.49128 13.4763,2.09786 14.2561,1.70443 15.1172,1.49911 15.9907,1.49834 19.0958,1.49834 21.6142,4.0269 21.6142,7.1522 21.6142,14.2322 15.0602,18.4094 12.127,19.4107z" Changed="Geometry_Changed">
+                                                        <GeometryDrawing.Pen>
+                                                            <Pen Brush="#FFFF003D" Thickness="1" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" MiterLimit="1" />
+                                                        </GeometryDrawing.Pen>
+                                                    </GeometryDrawing>
+                                                </DrawingGroup>
+                                            </DrawingImage.Drawing>
+                                        </DrawingImage>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
                         <TextBlock Text="{Binding Product.Like, StringFormat=' {0}k'}"
                                    Style="{DynamicResource TextBlockBase}"
                                    HorizontalAlignment="Right"
@@ -211,7 +232,13 @@
                                FontWeight="DemiBold"
                                Foreground="#329211"/>
                 </Grid>
-                <Button Grid.Row="4"
+                <TextBlock Grid.Row="4"
+                           Style="{DynamicResource TextBlockBase}"
+                           FontSize="25"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="{Binding Product.Quantity, StringFormat='Số lượng còn lại: {0}'}"/>
+                <Button Grid.Row="5"
                         Command="{Binding AddCommand}"
                         IsEnabled="{Binding IsEnableSub, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Style="{DynamicResource ButtonTemplate}"
@@ -219,12 +246,6 @@
                         Cursor="Hand">
 
                 </Button>
-                <TextBlock Grid.Row="5"
-                           Style="{DynamicResource TextBlockBase}"
-                           FontSize="12"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Text="{Binding Product.Person, StringFormat='Best for {0} person'}"/>
             </Grid>
         </Border>
     </Grid>

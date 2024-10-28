@@ -1,0 +1,65 @@
+﻿<Window x:Class="Day6_Sample.UserControls.DialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Day6_Sample.UserControls"
+        mc:Ignorable="d"
+        Title="DialogWindow"
+        Height="200"
+        Width="300"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        BorderBrush="Transparent">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30"
+                      GlassFrameThickness="0">
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
+    <Window.Effect>
+        <DropShadowEffect Color="Black" Direction="-90" ShadowDepth="0.5" BlurRadius="10" Opacity="0.5" />
+    </Window.Effect>
+    <Border CornerRadius="10"
+            BorderThickness="1"
+            Background="White"
+            Height="190"
+            Width="290">
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Thông báo"
+                       FontSize="25"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Xác nhận xóa sản phẩm khỏi giỏ hàng"
+                       FontSize="15"
+                       HorizontalAlignment="Center"
+                       Foreground="Gray"/>
+            <Border Height="40"
+                    Width="200"
+                    BorderThickness="1"
+                    Background="Green"
+                    Cursor="Hand"
+                    CornerRadius="20"
+                    Margin="0 30 0 5"
+                    MouseDown="Border_MouseDown">
+                <TextBlock Text="Đồng ý"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Foreground="White"/>
+            </Border>
+            <Border Height="40"
+                    Width="200"
+                    Background="Transparent"
+                    BorderThickness="1"
+                    BorderBrush="Gray"
+                    Cursor="Hand"
+                    CornerRadius="20"
+                    MouseDown="Border_MouseDown_1">
+                <TextBlock Text="Hủy bỏ"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Foreground="Gray"/>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

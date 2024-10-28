@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Day6_Sample.UserControls"
              xmlns:vm="clr-namespace:Day6_Sample.ViewModels"
-             mc:Ignorable="d"
-             Background="White">
+             mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:LeftMenuVM></vm:LeftMenuVM>
     </UserControl.DataContext>
@@ -30,7 +29,10 @@
             ItemsSource="{Binding Products}"
             SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             BorderThickness="0"
-            Padding="30  38 0 0">
+            Padding="30  38 0 0"
+            MaxHeight="600"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            VirtualizingPanel.ScrollUnit="Pixel">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
@@ -118,14 +120,14 @@
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" To="20 9 0 9" Duration="0:0:0.3"/>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" To="20 9 0 9" Duration="0:0:0.25"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiDataTrigger.EnterActions>
                             <MultiDataTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 9" Duration="0:0:0.3"/>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0 9" Duration="0:0:0.25"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiDataTrigger.ExitActions>

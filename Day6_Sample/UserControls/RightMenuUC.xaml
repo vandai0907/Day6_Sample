@@ -5,17 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Day6_Sample.UserControls"
              xmlns:vm="clr-namespace:Day6_Sample.ViewModels"
-             mc:Ignorable="d"
-             Background="#FF292929">
+             mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:RightMenuVM></vm:RightMenuVM>
     </UserControl.DataContext>
-    <Grid>
+    <Border CornerRadius="0 90 90 0"
+            BorderThickness="0.1"
+            BorderBrush="#FF292929"
+            Background="#FF292929">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top">
                 <Rectangle RadiusX="60" RadiusY="80" Width="67.44" Height="67.44" Margin=" 0 45 0 25">
                     <Rectangle.Fill>
-                        <ImageBrush ImageSource="../Images/Avatar.jfif"/>
+                        <ImageBrush ImageSource="../Images/avatar.png"/>
                     </Rectangle.Fill>
                 </Rectangle>
                 <Button Height="75"
@@ -108,7 +110,7 @@
                         Cursor="Hand"
                         Margin=" 0 10 0 15"
                         Command="{Binding NavigateCommand}"
-                        CommandParameter="..\UserControls\OrderSuccessUC.xaml">
+                        CommandParameter="..\UserControls\FavoriteMenuUC.xaml">
                     <Button.Template>
                         <ControlTemplate>
                             <Border CornerRadius="100"
@@ -158,5 +160,5 @@
                        MouseDown="Ins_OnMouseDown"/>
             </StackPanel>
         </DockPanel>
-    </Grid>
+    </Border>
 </UserControl>

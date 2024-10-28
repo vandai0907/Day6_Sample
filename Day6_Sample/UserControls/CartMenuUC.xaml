@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:Day6_Sample.UserControls"
              xmlns:vm="clr-namespace:Day6_Sample.ViewModels"
              mc:Ignorable="d"
-             Background="#FFFFFF"
              Padding="60 30">
     <UserControl.DataContext>
         <vm:CartMenuVM></vm:CartMenuVM>
@@ -255,7 +254,7 @@
                            FontSize="16"
                            HorizontalAlignment="Left"
                            Margin="0 10 0 0"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Tax, StringFormat='${0}'}"
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Tax, StringFormat={}{0:$0.0}}"
                            Style="{DynamicResource TextBlockBase}"
                            FontWeight="DemiBold"
                            FontSize="20"
@@ -274,7 +273,7 @@
                            FontSize="16"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="1" Text="{Binding TotalPrice, StringFormat='${0}'}"
+                <TextBlock Grid.Column="1" Text="{Binding TotalPrice, StringFormat={}{0:$0.0}}"
                            Style="{DynamicResource TextBlockBase}"
                            FontWeight="DemiBold"
                            FontSize="32"

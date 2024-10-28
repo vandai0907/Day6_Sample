@@ -9,9 +9,8 @@ using System.Windows.Input;
 
 namespace Day6_Sample.ViewModels;
 
-public partial class MainMenuVM : ObservableObject
+public class ProductDetailVM : ObservableObject
 {
-
     private Product _product;
     private bool _isEnableSub;
     private bool _isEnablePlus;
@@ -63,6 +62,8 @@ public partial class MainMenuVM : ObservableObject
     }
 
     private string _colorTest = "#FFFF003D";
+    private List<string> _images;
+    private string _selectedImages;
 
     public string ColorTest
     {
@@ -74,24 +75,51 @@ public partial class MainMenuVM : ObservableObject
         }
     }
 
+    public List<string> Images
+    {
+        get => _images;
+        set
+        {
+            _images = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string SelectedImages
+    {
+        get => _selectedImages;
+        set
+        {
+            _selectedImages = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ICommand TestColor { get; }
 
-
-    public MainMenuVM()
+    public ProductDetailVM()
     {
+        Product = ProductDetail.Product;
+        var images = new List<string>();
+        images.Add("../Images/Food1.png");
+        images.Add("../Images/Food2.png");
+        images.Add("../Images/Food3.png");
+        images.Add("../Images/Food4.png");
+        images.Add("../Images/Food5.png");
+        Images = images;
+        SelectedImages = Images.FirstOrDefault();
         var serviceProvider = App.GetServiceProvider();
         _cartService = serviceProvider.GetService<CartService>();
         _productService = serviceProvider.GetService<ProductService>();
 
-        Product = _productService.GetProducts().FirstOrDefault() ?? new Product();
         CountQuantity(string.Empty);
         WeakReferenceMessenger.Default.Register<SelectedProduct>(this, OnSelectedProduct);
 
         AddCommand = new RelayCommand(Add);
         CountQuantityCommand = new RelayCommand<string>(CountQuantity);
         TestColor = new RelayCommand(ChangeStatus);
-    }
 
+    }
     private void ChangeStatus()
     {
         ColorTest = _colorTest == "Transparent" ? "#FFFF003D" : "Transparent";
@@ -141,6 +169,9 @@ public partial class MainMenuVM : ObservableObject
             Like = _product.Like,
             Price = _product.Price
         };
+        Product = _product;
+        Quantity = 0;
+        CountQuantity(string.Empty);
         _cartService.AddToCart(product);
         _productService.UpdateQuantity(Product);
         WeakReferenceMessenger.Default.Send<ListProduct>(new ListProduct(Product));

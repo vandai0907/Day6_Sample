@@ -4,9 +4,10 @@ using CommunityToolkit.Mvvm.Messaging;
 using Day6_Sample.Interfaces;
 using Day6_Sample.Models;
 using Day6_Sample.Services;
+using Day6_Sample.UserControls;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
-using System.Windows.Forms;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Day6_Sample.ViewModels;
@@ -79,7 +80,7 @@ public partial class CartMenuVM : ObservableObject
     private void Init()
     {
         Cart = _cartService.GetCart();
-        var products = _productService.GetProducts();
+        var products = _productService.GetProducts().Where(p => p.Quantity > 0).ToList();
         foreach (var cart in Cart)
         {
             if (products.Exists(p => p.Id == cart.ProductId))
@@ -111,9 +112,13 @@ public partial class CartMenuVM : ObservableObject
         int quantity = cart.Quantity + value;
         if (quantity == 0)
         {
-            var decision = MessageBox.Show("Xóa sản phẩm khỏi giỏ hàng", "Xác nhận", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (decision == DialogResult.No) return;
+            DialogWindow dialog = new DialogWindow()
+            {
+                Owner = Application.Current.MainWindow
+            };
+            var decision = (bool)dialog.ShowDialog();
+
+            if (decision == false) return;
         }
         product.Quantity -= value;
         _productService.UpdateQuantity(product);
@@ -125,7 +130,7 @@ public partial class CartMenuVM : ObservableObject
 
         Init();
 
-        WeakReferenceMessenger.Default.Send<ListProduct>();
+        WeakReferenceMessenger.Default.Send<ListProduct>(new ListProduct());
         WeakReferenceMessenger.Default.Send<ListCart>(new ListCart());
         CalculatePrice();
     }
